@@ -1,0 +1,100 @@
+
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: 222 47% 4%;
+  --foreground: 213 31% 98%;
+  --primary: 199 89% 48%;
+  --primary-foreground: 210 40% 98%;
+  --card: 222 47% 2%;
+  --card-foreground: 213 31% 98%;
+  --border: 217 32% 12%;
+  --input: 217 32% 12%;
+  --ring: 199 89% 48%;
+  --radius: 1.5rem;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { 
+    @apply bg-background text-foreground antialiased selection:bg-primary/30 overflow-x-hidden; 
+  }
+}
+
+.glass-panel {
+  background: rgba(2, 6, 23, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+  transform: translateZ(0);
+}
+
+.brand-title {
+  font-weight: 900;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+}
+
+.neon-glow-primary {
+  filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.5));
+}
+
+.premium-card {
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  transform: translateZ(0);
+}
+
+@keyframes nebula-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+.nebula-pulse {
+  background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.15), transparent 70%);
+  animation: nebula-pulse 15s infinite ease-in-out;
+}
+
+.btn-cyber-primary {
+  background: var(--color-primary);
+  color: white;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px 0 rgba(14, 165, 233, 0.3);
+}
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.slow-spin {
+  animation: slow-spin 60s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .nebula-pulse, .slow-spin { animation: none !important; }
+}
